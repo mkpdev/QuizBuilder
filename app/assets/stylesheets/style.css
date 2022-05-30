@@ -1,0 +1,20 @@
+.home_index{
+  font-family: verdana, arial, helvetica, sens-serif;
+  font-size: 13px;
+  line-height: 18px;
+  height: 500px;
+  background-image: url('/assets/index.png');
+  background-repeat: no-repeat;
+}
+
+.profile{
+  background-size: 100% 100%;
+  background-position: center; 
+  background-attachment: fixed;
+  background-image: url('/assets/profile.jpeg');
+  background-repeat: no-repeat;
+}
+
+a{
+  color: blue;
+}
