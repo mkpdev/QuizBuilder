@@ -1,0 +1,46 @@
+<div class="new_quiz">
+<div class="container">
+  <h3><Strong>Question Details</Strong></h3>
+  <%= form_for @question, :url=> quiz_questions_path, method: :post do |f| %>
+    <% if @question.errors.any? %>
+      <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+        <% @question.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="information-list">
+        <div class="field">
+          <%= f.label :Title, class: "form-group" %>
+          <%= f.text_field :title, :required => true, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :QuestionType, class: "form-group" %>
+
+          <%= f.select :question_type, options_for_select(Question.question_types.map {|key, value| [key.titleize, Question.question_types.key(value)]}, @question.question_type ), :required => true, class: "form-control" %>
+        </div>
+      </div>  
+    </div>
+<br>
+<br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="actions">
+          <%= f.submit "Save", class:"btn btn-primary" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <%= link_to "Back", :back, class:"btn btn-link" %>
+      </div>
+    <br>
+    </div>
+   <% end %>
+</div>
+</div>
+

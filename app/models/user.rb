@@ -6,4 +6,8 @@ class User < ApplicationRecord
   has_many :quizzes
   has_many :answers
   enum role: [:admin, :user]
+
+  def is_admin!
+    self.role == 'admin'
+  end
 end
