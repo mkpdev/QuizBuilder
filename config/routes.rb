@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
+  resources :users do
+    collection do
+      get 'quiz_list'
+    end
 
+    collection do
+      get 'question_list'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -58,6 +66,8 @@ Rails.application.routes.draw do
   #   end
 
   resources :quizzes do
-    resources :questions
+    resources :questions do
+      resources :answers
+    end
   end
 end

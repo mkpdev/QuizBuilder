@@ -1,0 +1,43 @@
+<div class=quiz_index>
+  <h2>Question List</h2>
+  <table class="table table-bordered">
+    <thread>
+      <tr>
+        <th>QuestionTitle</th>
+        <th>Add Answer</th>
+        <th>Answer</th>
+      </tr>
+    </thread>
+    <tbody>
+      <% if @questions.blank? %>
+      <tr>
+        <td colspan="4" align="center"> No Record Found </td>
+      </tr>
+      <% else %>
+        <% @questions.each do |q| %>
+          <tr>
+            <td><%= q.title %></td>
+            <td><%= link_to 'add', new_quiz_question_answer_path(quiz_id: q.quiz.id, question_id: q.id) unless q.answers.present? %></td>
+            <td><%= q.answers.last&.response.to_s %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+      <%= link_to "Back", :back, class:"btn btn-link" %>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+
