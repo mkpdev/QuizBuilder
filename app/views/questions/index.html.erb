@@ -25,8 +25,8 @@
             <% if current_user.admin? %>
               <td> <%= link_to 'Destroy', quiz_question_path(id: q.id), method: :DELETE %></td>
             <% else %>
-              <% if q.answers&.last.present? %> 
-                <td><%= q.answers.last.response %></td>
+              <% if q.answers&.where(user_id: current_user.id).present? %> 
+                <td><%= q.answers.where(user_id: current_user.id).first.response %></td>
               <% else %>
                 <td><%= link_to 'add', new_quiz_question_answer_path(quiz_id: q.quiz.id, question_id: q.id) %></td>
               <% end %>         

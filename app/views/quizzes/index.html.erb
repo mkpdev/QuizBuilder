@@ -1,5 +1,13 @@
 <div class=quiz_index>
-  <h2>Quiz List</h2>
+  <div class="row">
+    <div class="col-md-9">
+      <h2>Quiz List</h2>
+    </div>
+    <div class="col-md-3 text-right">
+      <%= link_to 'Add Quiz', new_quiz_path, class: 'btn btn-primary' if current_user.admin? %>
+    </div>
+  </div>
+</div>
   <table class="table table-bordered">
     <thread>
       <tr>
@@ -7,7 +15,8 @@
         <th>View Question</th>
         <% if current_user.admin? %>
           <th>Add Question</th>
-          <th>Action</th>
+          <th>delete</th>
+          <th>Quiz Result</th>
         <% end %>
       </tr>
     </thread>
@@ -23,7 +32,8 @@
             <td><%= link_to 'view', quiz_questions_path(quiz_id: q.id) %></td>
             <% if current_user.admin? %>
               <td><%= link_to 'add', new_quiz_question_path(quiz_id: q.id) %></td>
-              <td> <%= link_to 'destroy', quiz_path(id: q.id), method: :DELETE %></td>
+              <td><%= link_to 'destroy', quiz_path(id: q.id), method: :DELETE %></td>
+              <td><%= link_to 'Quiz Result', quiz_result_quizzes_path(quiz_id: q.id) %></td>
             <% end %>
           </tr>
         <% end %>
@@ -35,9 +45,6 @@
     </div>
     <div class="col-md-3">
       <%= link_to "Back", :back, class:"btn btn-primary" %>
-    </div>
-    <div class="col-md-3">
-      <li><%= link_to 'Add Quiz', new_quiz_path, :class => 'btn btn-primary' if current_user.admin? %></li>
     </div>
     <div class="col-md-3">
     </div>

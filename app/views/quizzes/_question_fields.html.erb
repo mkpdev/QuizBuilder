@@ -1,11 +1,11 @@
 <div class = "nested-fields">
   <div class="field">
-    <%= f.label :Title, class: "form-group" %>
+    <%= f.label :title, class: "form-group" %>
     <%= f.text_field :title, :required => true, class: "form-control" %>
-  </div>
+  </div><br/>
 
   <div class="field">
-    <%= f.label :QuestionType, class: "form-group" %>
+    <%= f.label :question_type, class: "form-group" %>
     <%= f.select :question_type, options_for_select(Question.question_types.map {|key, value| [key.titleize, Question.question_types.key(value)]}, @question.question_type ), :required => true, class: "form-control" %>
   </div>
     <%= link_to_remove_association "remove questions", f %>

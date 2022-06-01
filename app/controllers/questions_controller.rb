@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_quiz, only: [:index, :new, :create]
   before_action :set_question, only: [:show, :destroy, :update]
 
@@ -19,9 +22,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show
-    @question
-  end
+  def show; end
 
   def destroy
     if @question.destroy
