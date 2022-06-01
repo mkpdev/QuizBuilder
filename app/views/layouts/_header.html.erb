@@ -19,8 +19,7 @@
             <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
             <li><%= link_to current_user.email, edit_user_registration_path %></li>
             <li><%= link_to('Add Quiz', new_quiz_path) if current_user.admin? %></li>
-            <li><%= link_to('Quiz List', quizzes_path) if current_user.admin? %></li>
-            <li><%= link_to('Quiz List', quiz_list_users_path) if current_user.user? %></li>
+            <li><%= link_to('Quiz List', quizzes_path) %></li>
           <% else %>
             <li><%= link_to('Sign in', new_user_session_path) %></li>
             <li><%= link_to('Sign up', new_user_registration_path) %></li>

@@ -1,11 +1,16 @@
 class QuizzesController < ApplicationController
   
   def index
-    @quizzes = current_user.quizzes
+    if current_user.admin?
+      @quizzes = current_user.quizzes
+    else
+      @quizzes = Quiz.all
+    end
   end
 
   def new
     @quiz = current_user.quizzes.new
+    @question = @quiz.questions.new
   end
 
   def create
@@ -28,6 +33,6 @@ class QuizzesController < ApplicationController
   
   private
     def quiz_params
-      params.require(:quiz).permit(:name)
+      params.require(:quiz).permit(:name, questions_attributes: [:title, :question_type])
     end
 end

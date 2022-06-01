@@ -1,4 +1,3 @@
-
 <div class=question_index>
   <h2>Question List</h2>
   <table class="table table-bordered">
@@ -6,20 +5,32 @@
       <tr>
         <th>Title</th>
         <th>QuestionType</th>
-        <th>Delete</th>
+        <% if current_user.admin? %>
+          <th>Delete</th>
+        <% else %>
+          <th>Add Answer</th>
+        <% end %>
       </tr>
     </thread>
     <tbody>
       <% if @questions.blank? %>
-      <tr>
-        <td colspan="4" align="center"> No Record Found </td>
-      </tr>
+        <tr>
+          <td colspan="4" align="center"> No Record Found </td>
+        </tr>
       <% else %>
         <% @questions.each do |q| %>
           <tr>
             <td><%= q.title %></td>
             <td><%= q.question_type %></td>
-            <td> <%= link_to 'Destroy', quiz_question_path(id: q.id), method: :DELETE %></td>
+            <% if current_user.admin? %>
+              <td> <%= link_to 'Destroy', quiz_question_path(id: q.id), method: :DELETE %></td>
+            <% else %>
+              <% if q.answers&.last.present? %> 
+                <td><%= q.answers.last.response %></td>
+              <% else %>
+                <td><%= link_to 'add', new_quiz_question_answer_path(quiz_id: q.quiz.id, question_id: q.id) %></td>
+              <% end %>         
+            <% end %>
           </tr>
         <% end %>
       <% end %>
@@ -29,9 +40,9 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-2">
+      <%= link_to "Back", :back, class:"btn btn-primary" %>
     </div>
     <div class="col-md-2">
-      <%= link_to "Back", :back, class:"btn btn-link" %>
     </div>
     <div class="col-md-2">
     </div>
@@ -41,4 +52,3 @@
     </div>
   </div>
 </div>
-

@@ -5,9 +5,11 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.create(response: answer_params, user_id: current_user.id, quiz_id: params[:quiz_id])
+    @answer = @question.answers.build(answer_params)
+    @answer.user_id = current_user.id
+    @answer.quiz_id = params[:quiz_id]
     if @answer.save
-      redirect_to question_list_users_path(:quiz_id => params[:quiz_id]), notice: 'answer created'
+      redirect_to quiz_questions_path(:quiz_id => params[:quiz_id]), notice: 'answer created'
     else
       redirect_to root_path, notice: 'answer has not been created'
     end
@@ -19,7 +21,7 @@ class AnswersController < ApplicationController
   end
   
   def answer_params
-    params.require(:answer).permit(:response)
+    params.require(:answer).permit(:response, :question_id)
   end
 end
  
