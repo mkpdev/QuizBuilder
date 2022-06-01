@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   subject {
-    described_class.new(title: "Test",
+    described_class.new(title: 'Test',
                         question_type: 1)
   }
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(subject).to be_valid
   end
 
-  it "is not valid without a title" do
+  it 'is not valid without a title' do
     subject.title = nil
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a question_type" do
+  it 'is not valid without a question_type' do
     subject.question_type = nil
     expect(subject).to_not be_valid
   end
